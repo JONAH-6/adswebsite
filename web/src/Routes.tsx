@@ -10,6 +10,8 @@
 import { Router, Route } from '@redwoodjs/router'
 
 import Startstep from 'src/pages/Startstep/Startstep'
+import WelcomePage from 'src/pages/WelcomePage/WelcomePage'
+import NotFoundPage from 'src/pages/NotFoundPage/NotFoundPage'
 
 const Routes = () => {
   return (
