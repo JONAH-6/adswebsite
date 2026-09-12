@@ -1,0 +1,8 @@
+[build]
+  command = "yarn rw deploy netlify"
+  publish = "web/dist"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
