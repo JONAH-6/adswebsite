@@ -64,9 +64,22 @@ const WelcomePage = () => {
   }
 
   const handleNext = async () => {
+    // UPDATED: Step 2 Validation now requires ALL fields + checks email format
     if (step === 2) {
-      if (!formData.fullName || !formData.email || !formData.phone) {
-        alert('Please fill in your Name, Email, and Phone Number to continue.')
+      if (
+        !formData.fullName.trim() ||
+        !formData.email.trim() ||
+        !formData.phone.trim() ||
+        !formData.whatsapp.trim()
+      ) {
+        alert('Please fill in ALL your personal details to continue.')
+        return
+      }
+
+      // Simple Email format validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!emailRegex.test(formData.email)) {
+        alert('Please enter a valid email address (e.g., name@example.com).')
         return
       }
     }
@@ -197,9 +210,10 @@ const WelcomePage = () => {
               }
               style={styles.input}
             />
+            {/* UPDATED: Removed (Optional) so users know it is required */}
             <input
               type="tel"
-              placeholder="WhatsApp Number (Optional)"
+              placeholder="WhatsApp Number *"
               value={formData.whatsapp}
               onChange={(e) =>
                 setFormData({ ...formData, whatsapp: e.target.value })
@@ -610,8 +624,6 @@ const styles: Record<string, React.CSSProperties> = {
     marginTop: '6px',
     fontWeight: '600',
   },
-
-  // INCREASED WIDTH: Max-width is now 800px and width is 100%
   mainContainer: {
     flex: 1,
     overflowY: 'auto',
@@ -624,7 +636,6 @@ const styles: Record<string, React.CSSProperties> = {
     margin: '0 auto',
     WebkitOverflowScrolling: 'touch',
   },
-
   optionLabel: {
     display: 'flex',
     alignItems: 'center',
